@@ -1,73 +1,90 @@
-# Welcome to your Lovable project
+# Portafolio de Proyectos - Cerámica Italia
 
-## Project info
+Aplicación React + Vite con API Node/Express para leer proyectos desde Google Sheets.
 
-**URL**: https://lovable.dev/projects/ef66dd96-833e-4039-b1d9-5728075443ad
+## Requisitos
 
-## How can I edit this code?
+- Node.js 18+
+- npm
+- Archivo de credenciales de Google Service Account
 
-There are several ways of editing your application.
+## Configuración
 
-**Use Lovable**
+### 1) Clonar e instalar
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/ef66dd96-833e-4039-b1d9-5728075443ad) and start prompting.
+```bash
+git clone https://github.com/TeknoDream/proyectos
+cd proyectos
+npm install
+```
 
-Changes made via Lovable will be committed automatically to this repo.
+### 2) Variables de entorno
 
-**Use your preferred IDE**
+Copia el ejemplo:
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+```bash
+cp .env.example .env
+```
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+Edita `.env` con tus valores. Variables principales:
 
-Follow these steps:
+- `GOOGLE_SHEETS_SPREADSHEET_ID`
+- `GOOGLE_SHEETS_SHEET_NAME` (por defecto `Datos`)
+- `GOOGLE_CREDENTIALS_PATH`
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+### 3) Credenciales de Google Sheets
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+1. Crea/usa una **Service Account** en Google Cloud.
+2. Descarga el JSON de credenciales.
+3. Coloca el archivo JSON en la **raíz del proyecto** (ejemplo: `./proyectos-493622.json`).
+4. Asegúrate de que `.env` tenga:
 
-# Step 3: Install the necessary dependencies.
-npm i
+```env
+GOOGLE_CREDENTIALS_PATH=./proyectos-493622.json
+```
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
+5. Comparte la hoja con el email de la Service Account (permiso de lectura).
+
+> ⚠️ El JSON de credenciales está ignorado en git y no debe subirse al repositorio.
+
+## Ejecutar en desarrollo
+
+```bash
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+Este comando levanta:
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+- Frontend Vite (puerto 8080)
+- API Express (puerto 8787 por defecto)
 
-**Use GitHub Codespaces**
+## Endpoints API
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+- `GET /api/proyectos`
+  - Retorna solo proyectos con `Estado = Publicar`
+- `GET /api/proyectos/categoria/:lugar`
+  - Filtra por `Lugar`
+- `GET /api/proyectos/subcategoria/:area?categoria=<lugar>`
+  - Filtra por `Area de intervencion`
+  - `categoria` es opcional para combinar filtros
 
-## What technologies are used for this project?
+## Estructura de datos esperada (hoja `Datos`)
 
-This project is built with:
+Columnas usadas:
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+- `ID`
+- `Estado`
+- `Nombre proyecto`
+- `Lugar`
+- `Area de intervencion`
+- `Ciudad`
+- `Imagen`
+- `Descripcion`
+- `Nombre de Contructora`
 
-## How can I deploy this project?
+## Build
 
-Simply open [Lovable](https://lovable.dev/projects/ef66dd96-833e-4039-b1d9-5728075443ad) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+```bash
+npm run build
+npm run preview
+```
