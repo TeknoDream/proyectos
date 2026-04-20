@@ -58,7 +58,7 @@ export function ProjectCard({ project, onClick, index }: ProjectCardProps) {
         {/* Category Badge */}
         <div className="absolute right-3 top-3 rounded-full bg-background/90 px-3 py-1 backdrop-blur-sm">
           <span className="font-sans text-xs font-medium capitalize text-foreground">
-            {project.subCategory}
+            {project.subCategoryLabel || project.subCategory}
           </span>
         </div>
       </div>
