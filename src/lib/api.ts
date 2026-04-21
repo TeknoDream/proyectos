@@ -1,5 +1,6 @@
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "";
 
+
 const getApiUrl = (path: string) => `${API_BASE_URL}${path}`;
 
 export const api = {
@@ -19,3 +20,4 @@ export const api = {
     return API_BASE_URL ? url.toString() : `${url.pathname}${url.search}`;
   },
 };
+

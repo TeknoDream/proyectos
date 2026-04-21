@@ -53,7 +53,8 @@ const Index = () => {
 
   useEffect(() => {
     const loadCatalog = async () => {
-      try {
+      try 
+      {
         setIsLoading(true);
         setError(null);
 
@@ -67,7 +68,9 @@ const Index = () => {
             subCategoriesByMain: payload.meta.subCategoriesByMain || {},
           });
         }
-      } catch (err) {
+      } // Try
+      catch (err) 
+      {
         console.error("Error cargando proyectos:", err);
         setError("No pudimos cargar los proyectos. Intenta nuevamente.");
       } finally {
