@@ -132,6 +132,10 @@ cd proyectos
 # Instalar dependencias del frontend
 npm install
 
+# Instalar dependencias CORS para el servidor
+npm install cors
+npm install -D @types/cors
+
 # Instalar dependencias del backend
 cd backend && npm install && cd ..
 ```
